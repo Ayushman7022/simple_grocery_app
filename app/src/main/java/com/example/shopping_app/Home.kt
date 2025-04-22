@@ -1,5 +1,6 @@
 package com.example.shopping_app
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 class Home : Fragment() {
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_home, container, false)
@@ -21,51 +23,60 @@ class Home : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // New Arrivals RecyclerView
-        val newArrivalsRecyclerView = view.findViewById<RecyclerView>(R.id.rvNewArrivals)
+        setupBestSellerRecyclerView(view)
+        setupNewArrivalsRecyclerView(view)
+    }
 
-        val newArrivalsList = listOf(
-            CategoryItem(R.drawable.img, "Fruits"),
-            CategoryItem(R.drawable.img, "Vegetables"),
-            CategoryItem(R.drawable.img, "Dairy"),
-            CategoryItem(R.drawable.img, "Beverages"),
-            CategoryItem(R.drawable.img, "Snacks"),
-            CategoryItem(R.drawable.img, "Bakery"),
-            CategoryItem(R.drawable.img, "Cereals"),
-            CategoryItem(R.drawable.img, "Spices"),
-            CategoryItem(R.drawable.img, "Snacks"),
-            CategoryItem(R.drawable.img, "Bakery"),
-            CategoryItem(R.drawable.img, "Cereals"),
-            CategoryItem(R.drawable.img, "Spices"),
-            CategoryItem(R.drawable.img, "Snacks"),
-            CategoryItem(R.drawable.img, "Bakery"),
-            CategoryItem(R.drawable.img, "Cereals"),
-            CategoryItem(R.drawable.img, "Spices"),
-            CategoryItem(R.drawable.img, "Snacks"),
-            CategoryItem(R.drawable.img, "Bakery"),
-            CategoryItem(R.drawable.img, "Cereals"),
-            CategoryItem(R.drawable.img, "Spices"),
-            CategoryItem(R.drawable.img, "Snacks"),
-            CategoryItem(R.drawable.img, "Bakery"),
-            CategoryItem(R.drawable.img, "Cereals"),
-            CategoryItem(R.drawable.img, "Spices")
-        )
-
-        newArrivalsRecyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
-        newArrivalsRecyclerView.adapter = CategoryAdapter(newArrivalsList)
-
-        // Best Seller RecyclerView
+    private fun setupBestSellerRecyclerView(view: View) {
         val bestSellerRecyclerView = view.findViewById<RecyclerView>(R.id.rvbestseller)
-
         val bestSellerList = listOf(
-            CategoryItem(R.drawable.img, "Apple"),
-            CategoryItem(R.drawable.img, "Milk"),
-            CategoryItem(R.drawable.img, "Cold Drink"),
-            CategoryItem(R.drawable.img, "Chips")
+            CategoryItem(R.drawable.apple, "Fruits", "fruits"),
+            CategoryItem(R.drawable.carrot, "Vegetables", "vegetables"),
+            CategoryItem(R.drawable.milk, "Dairy", "dairy"),
+            CategoryItem(R.drawable.grains, "Grains", "grains")
         )
 
-        bestSellerRecyclerView.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        bestSellerRecyclerView.adapter = CategoryAdapter(bestSellerList)
+        bestSellerRecyclerView.apply {
+            layoutManager = LinearLayoutManager(
+                requireContext(),
+                LinearLayoutManager.HORIZONTAL,
+                false
+            )
+            adapter = CategoryAdapter(bestSellerList) { clickedItem ->
+                openCategoryList(clickedItem)
+            }
+            setHasFixedSize(true)
+        }
+    }
+
+    private fun setupNewArrivalsRecyclerView(view: View) {
+        val newArrivalsRecyclerView = view.findViewById<RecyclerView>(R.id.rvNewArrivals)
+        val newArrivalsList = listOf(
+            CategoryItem(R.drawable.strawberry, "Strawberry", "fruits"),
+
+        )
+
+        newArrivalsRecyclerView.apply {
+            layoutManager = GridLayoutManager(requireContext(), 2) // 2-column grid
+            adapter = CategoryAdapter(newArrivalsList) { clickedItem ->
+                // Open the appropriate category activity
+                openCategoryList(clickedItem)
+            }
+            setHasFixedSize(true)
+        }
+    }
+
+    private fun openCategoryList(item: CategoryItem) {
+        val intent = when (item.categoryType) {
+            "fruits" -> Intent(requireContext(), FruitsActivity::class.java)
+            "vegetables" -> Intent(requireContext(), VegetablesActivity::class.java)
+
+
+            else -> Intent(requireContext(), Vegis::class.java)
+        }.apply {
+            // Pass any relevant data to the activity
+            putExtra("CATEGORY_NAME", item.title)
+        }
+        startActivity(intent)
     }
 }

@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="fruit_background">#FFF8F1</color>  <!-- Light orange -->
+    <color name="vegetable_background">#F1FFF5</color>  <!-- Light green -->
+    <color name="dairy_background">#F1F9FF</color>  <!-- Light blue -->
+    <color name="default_product_background">#FFFFFF</color>
 </resources>

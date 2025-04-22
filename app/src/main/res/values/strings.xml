@@ -2,4 +2,13 @@
     <string name="app_name">shopping_app</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="default_fruit_name">Fruit</string>
+    <string name="default_vegetable_name">Vegetable</string>
+    <string name="default_nutrition_info">Nutrition information not available</string>
+    <string name="default_storage_tips">Store in cool, dry place</string>
+
+    <string name="apple_nutrition">Calories: 95\nFiber: 4g\nVitamin C: 14%</string>
+    <string name="banana_nutrition">Calories: 105\nPotassium: 12%\nVitamin B6: 20%</string>
+    <string name="carrot_storage">Store in fridge in perforated bag\nLasts 4-5 weeks</string>
+    <string name="tomato_storage">Store at room temperature\nAvoid refrigeration</string>
 </resources>

@@ -13,6 +13,12 @@
         android:theme="@style/Theme.Shopping_app"
         tools:targetApi="31">
         <activity
+            android:name=".VegetablesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FruitsActivity"
+            android:exported="false" />
+        <activity
             android:name=".Vegis"
             android:exported="false" />
         <activity
