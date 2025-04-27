@@ -1,6 +1,5 @@
-package com.example.shopping_app
-
 data class VegetableItem(
-    val imageRes: Int,
-    val name: String
+    val imageResId: Int,
+    val name: String,
+    var quantity: Int = 0 // Add quantity property
 )

@@ -53,11 +53,17 @@ class Home : Fragment() {
         val newArrivalsRecyclerView = view.findViewById<RecyclerView>(R.id.rvNewArrivals)
         val newArrivalsList = listOf(
             CategoryItem(R.drawable.strawberry, "Strawberry", "fruits"),
+            CategoryItem(R.drawable.coffee, "Tea, Coffee & Milk", "Tea, Coffee & Milk"),
+            CategoryItem(R.drawable.instant, "Instant Food", "Instant Food"),
+            CategoryItem(R.drawable.choco, "Sweets & Chocolates", "Sweets & Chocolates"),
+            CategoryItem(R.drawable.drinks, "Drinks & Juices", "Drinks & Juices"),
+            CategoryItem(R.drawable.icecream, "Ice Creams & More", "Ice Creams & More")
+
 
         )
 
         newArrivalsRecyclerView.apply {
-            layoutManager = GridLayoutManager(requireContext(), 2) // 2-column grid
+            layoutManager = GridLayoutManager(requireContext(), 4) // 2-column grid
             adapter = CategoryAdapter(newArrivalsList) { clickedItem ->
                 // Open the appropriate category activity
                 openCategoryList(clickedItem)
@@ -67,15 +73,14 @@ class Home : Fragment() {
     }
 
     private fun openCategoryList(item: CategoryItem) {
-        val intent = when (item.categoryType) {
+        val intent = when (item.categoryType.lowercase()) { // ← Add .lowercase()
             "fruits" -> Intent(requireContext(), FruitsActivity::class.java)
             "vegetables" -> Intent(requireContext(), VegetablesActivity::class.java)
 
-
-            else -> Intent(requireContext(), Vegis::class.java)
+            else -> Intent(requireContext(), VegetablesActivity::class.java)
         }.apply {
-            // Pass any relevant data to the activity
             putExtra("CATEGORY_NAME", item.title)
+            putExtra("CATEGORY_IMAGE", item.imageResId) // Also pass image
         }
         startActivity(intent)
     }
