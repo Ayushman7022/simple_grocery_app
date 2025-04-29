@@ -26,12 +26,12 @@ class VegetablesActivity : AppCompatActivity() {
         supportActionBar?.title = "All Vegetables"
 
         val vegetablesList = listOf(
-            VegetableItem(R.drawable.carrot, "Carrot"),
-            VegetableItem(R.drawable.tomato, "Tomato"),
-            VegetableItem(R.drawable.broccoli, "Broccoli"),
-            VegetableItem(R.drawable.potato, "Potato"),
-            VegetableItem(R.drawable.onion, "Onion"),
-            VegetableItem(R.drawable.cucumber, "Cucumber")
+            VegetableItem(R.drawable.carrot, "Carrot",30.00),
+            VegetableItem(R.drawable.tomato, "Tomato",60.00),
+            VegetableItem(R.drawable.broccoli, "Broccoli",100.00),
+            VegetableItem(R.drawable.potato, "Potato",20.00),
+            VegetableItem(R.drawable.onion, "Onion",30.00),
+            VegetableItem(R.drawable.cucumber, "Cucumber",50.00)
         )
 
         adapter = VegetableAdapter(

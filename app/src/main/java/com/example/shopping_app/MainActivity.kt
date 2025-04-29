@@ -11,10 +11,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this, MainActivity2::class.java)
-            startActivity(intent)
-            finish() // optional: finish current activity so user can’t come back
-        }, 3000) // delay in milliseconds (3000ms = 3 seconds)
+
     }
 }

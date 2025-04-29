@@ -5,19 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import kotlinx.coroutines.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [splash.newInstance] factory method to
- * create an instance of this fragment.
- */
 class splash : Fragment() {
-    // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
@@ -33,22 +25,28 @@ class splash : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_splash, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Start coroutine in the lifecycle scope
+        lifecycleScope.launch {
+            // Delay for 2 seconds (2000 milliseconds)
+            delay(2000)
+
+            // Navigate to next fragment using Navigation Component
+            findNavController().navigate(R.id.splash2)
+        }
+    }
+
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment splash.
-         */
-        // TODO: Rename and change types and number of parameters
+        private const val ARG_PARAM1 = "param1"
+        private const val ARG_PARAM2 = "param2"
+
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(param1: String = "", param2: String = "") =
             splash().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)

@@ -39,6 +39,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.firebase.crashlytics.buildtools)
     val nav_version = "2.8.9"
 
     // Jetpack Compose integration

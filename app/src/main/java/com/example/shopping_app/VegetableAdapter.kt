@@ -89,4 +89,9 @@ class VegetableAdapter(
         return vegetables.filter { it.quantity > 0 }
             .map { it to it.quantity }
     }
+    data class CartItem(
+        val vegetableItem: VegetableItem,
+        val quantity: Int,
+        val totalPrice: Double
+    )
 }
